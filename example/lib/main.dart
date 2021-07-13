@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
         body: new Center(
           child: isMakePayment
               ? CircularProgressIndicator()
-              : RaisedButton(
+              : ElevatedButton(
                   child: Text("Make Payment"),
                   onPressed: () => _makePayment(),
                 ),

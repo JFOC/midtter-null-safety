@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 typedef Future<void> MidtransCallback(TransactionFinished transactionFinished);
 
 class Midtter {
-  MidtransCallback finishCallback;
+  MidtransCallback? finishCallback;
   static Midtter _instance = Midtter._internal();
   static const MethodChannel _channel = const MethodChannel('midtter');
 
@@ -21,7 +21,7 @@ class Midtter {
   Future<dynamic> _channelHandler(MethodCall methodCall) async {
     if (methodCall.method == "onTransactionFinished") {
       if (finishCallback != null) {
-        await finishCallback(TransactionFinished(
+        await finishCallback!(TransactionFinished(
           methodCall.arguments['transactionCanceled'],
           methodCall.arguments['status'],
           methodCall.arguments['source'],
@@ -54,10 +54,10 @@ class Midtter {
 }
 
 class MidtransCustomer {
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phone;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? phone;
   MidtransCustomer(this.firstName, this.lastName, this.email, this.phone);
   MidtransCustomer.fromJson(Map<String, dynamic> json)
       : firstName = json["first_name"],
@@ -75,10 +75,10 @@ class MidtransCustomer {
 }
 
 class MidtransItem {
-  final String id;
-  final int price;
-  final int quantity;
-  final String name;
+  final String? id;
+  final int? price;
+  final int? quantity;
+  final String? name;
   MidtransItem(this.id, this.price, this.quantity, this.name);
   MidtransItem.fromJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -101,8 +101,8 @@ class MidtransTransaction {
   final MidtransCustomer customer;
   final List<MidtransItem> items;
   final bool skipCustomer;
-  final String customField1;
-  final String paymentMethod;
+  final String? customField1;
+  final String? paymentMethod;
   MidtransTransaction(
     this.orderID,
     this.total,
@@ -126,11 +126,11 @@ class MidtransTransaction {
 }
 
 class TransactionFinished {
-  final bool transactionCanceled;
-  final String status;
-  final String source;
-  final String statusMessage;
-  final String response;
+  final bool? transactionCanceled;
+  final String? status;
+  final String? source;
+  final String? statusMessage;
+  final String? response;
   TransactionFinished(
     this.transactionCanceled,
     this.status,
