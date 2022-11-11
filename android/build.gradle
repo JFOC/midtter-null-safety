@@ -17,6 +17,8 @@ rootProject.allprojects {
         google()
         jcenter()
         // maven { url "http://dl.bintray.com/pt-midtrans/maven" }
+        maven { url "https://repo1.maven.org/maven2/com/midtrans/java-library/" }
+        mavenCentral()
         maven { url "https://jitpack.io" }
     }
 }
